@@ -1,0 +1,78 @@
+@use '../util/index' as u;
+
+:root {
+  --ff-primary: PT Sans, sans-serif;
+
+  --fw-regular: 400;
+  --fw-bold: 700;
+}
+
+@media (min-width: 49.98em) {
+  :root {
+    --fs-card-text: 1rem;
+  }
+}
+
+* {
+  font: inherit;
+}
+
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  font-weight: var(--fw-bold);
+}
+
+//810*0.075 // 1 rem = 16px
+
+h1 {
+  font-size: clamp(u.rem(22), u.rem(15) + 2vw, u.rem(41));
+}
+
+h4 {
+  font-size: u.rem(18);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(u.rem(22), u.rem(10) + 2vw, u.rem(34));
+}
+
+h3 {
+  font-size: u.rem(31);
+}
+
+p {
+  font-size: 1rem;
+  font-family: var(--ff-primary);
+  line-height: 1.2;
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: #000000;
+}
