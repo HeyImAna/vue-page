@@ -53,7 +53,7 @@ h2 {
 }
 
 h3 {
-  font-size: u.rem(31);
+  font-size: clamp(u.rem(22), u.rem(10) + 2vw, u.rem(31));
 }
 
 p {

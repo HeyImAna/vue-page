@@ -85,15 +85,11 @@ h2 {
   justify-items: center;
   display: grid;
   gap: u.rem(35);
-  grid-template-columns: repeat(auto-fit, minmax(u.rem(362), 1fr));
-
-  @media (max-width: 27.5em) {
-    justify-items: start;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(u.rem(275), 1fr));
 
   .card {
-    width: u.rem(362);
-    height: u.rem(151);
+    max-width: u.rem(362);
+    max-height: u.rem(151);
     padding: u.rem(40) u.rem(20);
     border: u.rem(1) solid #eeeff1;
     background-color: #fbfcfd;
@@ -102,9 +98,9 @@ h2 {
     align-items: center;
     gap: u.rem(15);
 
-    @media (max-width: 27.5em) {
-      width: u.rem(280);
-      height: u.rem(200);
+    @media (max-width: 78em) {
+      max-width: u.rem(520);
+      max-height: u.rem(200);
     }
 
     &__text {

@@ -12,7 +12,6 @@ const props = defineProps({
         type: 'text',
         label: 'Label',
         errorMessage: null,
-        pattern: '',
         minLength: null,
         maxLength: null
       }
@@ -20,7 +19,7 @@ const props = defineProps({
   }
 })
 
-const localError = ref('')
+const borderError = ref('')
 
 const emit = defineEmits(['update:modelValue', 'form-validate'])
 
@@ -34,9 +33,9 @@ const validate = (event) => {
     event.target.value.length <= props.componentData.maxLength
 
   if (!isLengthValid) {
-    localError.value = `От ${props.componentData.minLength} до ${props.componentData.maxLength} символов`
+    borderError.value = 'rgb(175, 32, 32)'
   } else {
-    localError.value = ''
+    borderError.value = ''
   }
 
   emit('form-validate', !!isLengthValid)
@@ -47,16 +46,11 @@ const validate = (event) => {
   <div class="text">
     <label for="name">{{ props.componentData.label }}</label>
     <input
-      class="input"
-      :style="props.componentData.errorMessage || (localError && 'border-color:rgb(175, 32, 32);')"
+      :style="{ 'border-color': borderError }"
       :type="props.componentData.type"
       @input="handleInput"
       @blur="validate"
     />
-
-    <span v-if="props.componentData.errorMessage || localError">{{
-      props.componentData.errorMessage || localError
-    }}</span>
   </div>
 </template>
 
@@ -74,10 +68,6 @@ const validate = (event) => {
     border: u.rem(1) solid var(--clr-gray);
     border-radius: u.rem(5);
     height: 2.5rem;
-
-    @media (max-width: 36.25em) {
-      width: u.rem(280);
-    }
 
     &:focus {
       border: u.rem(1) solid rgb(81, 81, 81);

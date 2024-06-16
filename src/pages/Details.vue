@@ -67,7 +67,7 @@
 .wrap {
   padding-top: u.rem(80);
   max-width: u.rem(1164);
-  margin-bottom: u.rem(254);
+  margin-bottom: 2rem;
 
   .title {
     margin-bottom: 2.5rem;
@@ -78,6 +78,10 @@
     display: flex;
     flex-direction: column;
     gap: u.rem(25);
+
+    @media (max-width: 40em) {
+      text-align: justify;
+    }
   }
 
   .blocks {

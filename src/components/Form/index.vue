@@ -11,8 +11,7 @@ import Screen from '../svg/Screen.vue'
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
 
-// toast (START)
-
+/* toast (START) */
 const toast = useToast()
 
 const toastSuccess = () => {
@@ -34,11 +33,9 @@ const toastError = () => {
     life: 2000
   })
 }
+/* toast (END) */
 
-// toast (END)
-
-//form (START)
-
+/* form (START) */
 const form = reactive({
   autoNumber: '',
   region: '',
@@ -49,24 +46,24 @@ const autoNumberComponent = ref({
   type: 'text',
   label: 'Номер автомобиля',
   errorMessage: null,
-  minLength: 6,
-  maxLength: 6
+  minLength: 1,
+  maxLength: 10
 })
 
 const regionComponent = ref({
   type: 'text',
   label: 'Регион',
   errorMessage: null,
-  minLength: 6,
-  maxLength: 16
+  minLength: 1,
+  maxLength: 10
 })
 
 const registrationComponent = ref({
   type: 'text',
   label: 'Свидетельство о регистрации ТС',
   errorMessage: null,
-  minLength: 6,
-  maxLength: 16
+  minLength: 1,
+  maxLength: 10
 })
 
 const isFormValid = ref(true)
@@ -77,10 +74,13 @@ const validateForm = (isValid) => {
 
 const onSubmit = async () => {
   try {
+    const allInputs = document.querySelectorAll('input')
     if (!isFormValid.value || !form.autoNumber || !form.region || !form.registration) {
       toastError()
+      allInputs.forEach((singleInput) => {
+        !singleInput.value ? (singleInput.style.borderColor = 'rgb(175, 32, 32)') : ''
+      })
     } else {
-      const allInputs = document.querySelectorAll('input')
       allInputs.forEach((singleInput) => (singleInput.value = ''))
       toastSuccess()
     }
@@ -88,11 +88,11 @@ const onSubmit = async () => {
     console.log(error)
   }
 }
-//form (END)
+/* form (END) */
 
-//window (START)
+/* window (START) */
 const { openWindow } = inject('window')
-//window (END)
+/* window (END) */
 </script>
 
 <template>
@@ -104,15 +104,14 @@ const { openWindow } = inject('window')
         <div class="row">
           <TextInput
             isFormValid
-            style="width: 56.84%; margin-right: 9px"
+            class="row__input-1"
             v-model="form.autoNumber"
             :component-data="autoNumberComponent"
             @form-validate="validateForm"
           />
-
           <TextInput
             isFormValid
-            style="width: 37.84%"
+            class="row__input-2"
             v-model="form.region"
             :component-data="regionComponent"
             @form-validate="validateForm"
@@ -157,8 +156,16 @@ const { openWindow } = inject('window')
   align-items: center;
   margin-bottom: u.rem(98);
 
+  @media (max-width: 61em) {
+    gap: 0;
+  }
+
   &__left {
     max-width: u.rem(563);
+
+    @media (max-width: 61em) {
+      margin-inline: auto;
+    }
 
     h1 {
       margin-bottom: u.rem(25);
@@ -173,44 +180,61 @@ const { openWindow } = inject('window')
         display: flex;
         gap: u.rem(21);
 
-        @media (max-width: 36.25em) {
+        @media (max-width: 61em) {
           flex-wrap: wrap;
         }
 
-        h4 {
-          text-align: center;
+        &__input-1 {
+          width: 56.84%;
+          margin-right: 9px;
+        }
+        &__input-2 {
+          width: 37.84%;
+        }
+
+        @media (max-width: 61em) {
+          &__input-1,
+          &__input-2 {
+            width: 100%;
+            margin: 0;
+          }
         }
 
         &__action,
         &__video {
           display: flex;
           gap: u.rem(5.3);
+          height: u.rem(45);
+
+          h4 {
+            text-align: center;
+          }
         }
 
         &__action {
           width: u.rem(210);
-          height: u.rem(45);
         }
         &__video {
           width: u.rem(258);
-          height: u.rem(45);
           border: u.rem(1) solid var(--clr-button);
           background-color: #fff;
           color: #000;
 
-          &:hover,
-          &:active {
-            background-color: var(--clr-button);
-            color: #fff;
-
-            span {
-              color: #fff;
-            }
-          }
-
           span {
             color: var(--clr-title);
             font-size: u.rem(15);
+          }
+
+          &:hover,
+          &:active {
+            background-color: #deefff;
+          }
+        }
+
+        @media (max-width: 61em) {
+          &__action,
+          &__video {
+            width: 100%;
           }
         }
       }

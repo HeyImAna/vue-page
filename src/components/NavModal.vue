@@ -8,10 +8,16 @@ defineProps({
   <nav>
     <img @click="() => closeMenu()" src="/public/images/closeIcon.png" alt="close" />
     <ul>
-      <router-link to="/auth"><li @click="() => closeMenu()">Вход</li></router-link>
-      <router-link to="/price"><li @click="() => closeMenu()">Тарифы</li></router-link>
-      <router-link to="/contact"><li @click="() => closeMenu()">Контакты</li></router-link>
-      <li>+7 495 118-44-22</li>
+      <router-link to="/auth"
+        ><li @click="() => closeMenu()" class="link"><h4>Вход</h4></li></router-link
+      >
+      <router-link to="/price"
+        ><li @click="() => closeMenu()" class="link"><h4>Тарифы</h4></li></router-link
+      >
+      <router-link to="/contact"
+        ><li @click="() => closeMenu()" class="link"><h4>Контакты</h4></li></router-link
+      >
+      <li class="num"><h4>+7 495 118-44-22</h4></li>
     </ul>
   </nav>
 </template>
@@ -24,9 +30,9 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 30%;
   z-index: 20;
-  background-color: #000;
+  background-color: #222222;
   padding: 2.5rem;
 
   img {
@@ -35,9 +41,23 @@ nav {
     cursor: pointer;
   }
 
-  li {
-    color: #fff;
-    margin-bottom: 1rem;
+  ul {
+    margin-top: 1rem;
+    width: 80%;
+
+    .link,
+    .num {
+      color: #fff;
+      padding: 0.5rem;
+    }
+
+    .link {
+      transition: 0.3s ease-out;
+      &:hover,
+      &:active {
+        color: rgb(73, 113, 159);
+      }
+    }
   }
 }
 </style>

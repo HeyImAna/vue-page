@@ -89,7 +89,7 @@ header {
   position: fixed;
   width: 100%;
   min-height: u.rem(60);
-  max-width: u.rem(1920);
+
   background: var(--clr-linear);
   color: #fff;
   top: 0;
@@ -103,6 +103,8 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: u.rem(12) 0;
+    max-width: u.rem(1920);
+    margin-inline: auto;
 
     .menu {
       cursor: pointer;

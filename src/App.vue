@@ -2,12 +2,11 @@
 import { ref, provide } from 'vue'
 //components
 import Header from './components/Header.vue'
-import Modal from './components/Modal.vue'
+import ModalWindow from './components/ModalWindow.vue'
 import NavModal from './components/NavModal.vue'
 import { onClickOutside } from '@vueuse/core'
 
-//modal video (START)
-
+/* modal video (START) */
 const windowOpen = ref(false)
 
 const closeWindow = () => {
@@ -22,15 +21,14 @@ const openWindow = () => {
 }
 
 const deleteModalRef = ref(null)
-
 onClickOutside(deleteModalRef, closeWindow)
 
 provide('window', {
   openWindow
 })
-//modal video (END)
+/* modal video (END) */
 
-//menu modal (START)
+/* menu modal (START) */
 const menuOpen = ref(false)
 
 const closeMenu = () => {
@@ -40,12 +38,14 @@ const openMenu = () => {
   menuOpen.value = true
 }
 
-//menu modal (END)
+const deleteNavRef = ref(null)
+onClickOutside(deleteNavRef, closeMenu)
+/* menu modal (END) */
 </script>
 
 <template>
-  <NavModal :closeMenu="closeMenu" v-if="menuOpen" />
-  <Modal style="pointer-events: auto" ref="deleteModalRef" v-if="windowOpen" />
+  <NavModal ref="deleteNavRef" :closeMenu="closeMenu" v-if="menuOpen" />
+  <ModalWindow ref="deleteModalRef" @close-window="closeWindow" v-if="windowOpen" />
   <div class="wrapper">
     <Header @open-menu="openMenu" />
 
@@ -54,5 +54,3 @@ const openMenu = () => {
     </main>
   </div>
 </template>
-
-<style scoped lang="scss"></style>

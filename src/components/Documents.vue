@@ -1,5 +1,5 @@
 <script setup>
-import Swiper from '../components/Slider/index.vue'
+import Swiper from '../components/Swiper/index.vue'
 </script>
 
 <template>
@@ -10,6 +10,6 @@ import Swiper from '../components/Slider/index.vue'
 <style scoped lang="scss">
 h2 {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.5rem;
 }
 </style>
